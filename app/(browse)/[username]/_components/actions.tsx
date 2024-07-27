@@ -1,6 +1,6 @@
 "use client";
 
-import { onFollow } from "@/actions/follow";
+import { onFollow, unFollow } from "@/actions/follow";
 import { Button } from "@/components/ui/button";
 import { useTransition } from "react";
 import { toast } from "sonner";
@@ -12,10 +12,11 @@ export function UserAction({
   isFollowing: boolean;
   userId: string;
 }) {
-  const [isPending, startTransition] = useTransition();
+  const [isFollowPending, startFollowTransition] = useTransition();
+  const [isUnFollowPending, startUnfollowTransition] = useTransition();
 
-  const handleOnClick = () => {
-    startTransition(() => {
+  const handleOnFollow = () => {
+    startFollowTransition(() => {
       onFollow(userId)
         .then((data) => {
           if (data) {
@@ -26,18 +27,47 @@ export function UserAction({
         })
         .catch((error) => {
           console.error("Follow error:", error);
-          toast.error("Failed to follow user. Please try again later.");
+          toast.error(error);
+        });
+    });
+  };
+
+  const handleUnFollow = () => {
+    startUnfollowTransition(() => {
+      unFollow(userId)
+        .then((data) => {
+          if (data) {
+            toast.success(`You are unfollowed ${data.following.username}`);
+          } else {
+            toast.error("Failed to follow user. Please try again later.");
+          }
+        })
+        .catch((error) => {
+          console.error("Follow error:", error);
+          toast.error(error);
         });
     });
   };
 
   return (
-    <Button
-      disabled={isPending || isFollowing}
-      onClick={handleOnClick}
-      variant={"primary"}
-    >
-      {!isPending ? "Follow" : "Following..."}
-    </Button>
+    <>
+      {isFollowing ? (
+        <Button
+          disabled={isUnFollowPending}
+          onClick={handleUnFollow}
+          variant={"primary"}
+        >
+          {!isUnFollowPending ? "Unfollow" : "Unfollowing..."}
+        </Button>
+      ) : (
+        <Button
+          disabled={isFollowPending || isFollowing}
+          onClick={handleOnFollow}
+          variant={"primary"}
+        >
+          {!isFollowPending ? "Follow" : "Following..."}
+        </Button>
+      )}
+    </>
   );
 }
