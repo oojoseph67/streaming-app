@@ -2,3 +2,9 @@
 --- integrate them
 --- setup the auth and middleware and route
 --- setup the recommendation list and route
+--- follow and follower list setup
+--- ui navigation
+////////////////////////////////
+consider the user of react query
+////////////////////////////////
+--- 

@@ -4,18 +4,35 @@ import { getSelf } from "@/lib/auth-service";
 export const getRecommended = async () => {
   await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  const self = await getSelf();
+  let userId;
 
-  if (!self) {
-    // Handle the case when there is no user
-    return [];
+  try {
+    const self = await getSelf();
+    if (!self) {
+      // Handle the case when there is no user
+      return [];
+    }
+    userId = self.id;
+  } catch {
+    userId = null;
   }
 
-  const users = await db.user.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  let users = [];
+
+  if (userId && userId) {
+    users = await db.user.findMany({
+      where: {
+        id: { notIn: [userId] },
+      },
+      take: 10,
+      orderBy: { createdAt: "desc" },
+    });
+  } else {
+    users = await db.user.findMany({
+      take: 10,
+      orderBy: { createdAt: "desc" },
+    });
+  }
 
   return users;
 
