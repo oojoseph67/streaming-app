@@ -2,6 +2,7 @@
 
 import { useSidebarStore } from "@/utils/store/use-sidebar";
 import { User } from "@prisma/client";
+import { UserItem, UserItemSkeleton } from "./user-item";
 
 export function Recommended({ data }: { data: User[] }) {
   const { collapsed } = useSidebarStore((state) => state);
@@ -14,6 +15,28 @@ export function Recommended({ data }: { data: User[] }) {
           <p className="font-semibold text-primary">Recommended</p>
         </div>
       )}
+      <ul className="space-y-2 px-2">
+        {data.map((user, index) => {
+          return (
+            <UserItem
+              key={index}
+              username={user.username}
+              imageUrl={user.imageUrl}
+              isLive={true}
+            />
+          );
+        })}
+      </ul>
     </div>
+  );
+}
+
+export function RecommendedSkeleton() {
+  return (
+    <ul className="px-2">
+      {[...Array(3)].map((_, index) => (
+        <UserItemSkeleton key={index} />
+      ))}
+    </ul>
   );
 }

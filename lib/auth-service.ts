@@ -1,20 +1,25 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 
-// get a fully registered user
-
 export const getSelf = async () => {
-  const user = await currentUser();
+  try {
+    const user = await currentUser();
 
-  if (!user) {
-    throw new Error("Unauthorized. No user found.");
+    if (!user) {
+      return null;
+    }
+
+    const self = await db.user.findUnique({
+      where: { externalUserId: user.id },
+    });
+
+    if (!self) {
+      return null;
+    }
+
+    return self;
+  } catch (error) {
+    console.error("Error fetching self:", error);
+    return null;
   }
-
-  const self = await db.user.findUnique({ where: { externalUserId: user.id } });
-
-  if (!self) {
-    throw new Error("User not found.");
-  }
-
-  return self;
 };
