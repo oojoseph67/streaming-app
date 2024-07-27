@@ -1,4 +1,4 @@
-import { Actions } from "../actions";
+import { Actions } from "./actions";
 import { Logo } from "./logo";
 import { SearchBar } from "./search-bar";
 

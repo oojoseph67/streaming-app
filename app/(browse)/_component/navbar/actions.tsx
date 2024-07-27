@@ -1,19 +1,16 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
 import { Clapperboard } from "lucide-react";
 import Link from "next/link";
 
 export function Actions() {
   const user = useUser();
-  console.log({ user });
-
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
       {!user.isSignedIn && (
-        <SignInButton >
+        <SignInButton>
           <Button variant={"primary"} size={"sm"}>
             Login
           </Button>
