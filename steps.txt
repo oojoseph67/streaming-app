@@ -1,0 +1,4 @@
+--- setup clerk and neon
+--- integrate them
+--- setup the auth and middleware and route
+--- setup the recommendation list and route
