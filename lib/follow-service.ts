@@ -35,6 +35,32 @@ export async function isFollowingUser(id: string) {
   }
 }
 
+export async function getFollowedUsers() {
+  try {
+    await checkDbConnection();
+
+    const self = await getSelf();
+
+    if (!self) {
+      throw new Error("User not authenticated");
+    }
+
+    const followedUsers = await db.follow.findMany({
+      where: {
+        followerId: self.id,
+      },
+      include: {
+        following: true,
+      },
+    });
+
+    return followedUsers;
+    // return followedUsers.map((follow) => follow.following);
+  } catch {
+    return [];
+  }
+}
+
 export async function followUser(id: string) {
   try {
     await checkDbConnection(); // Check database connection
