@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -23,6 +20,9 @@ model User {
   follows   Follow[] @relation("UserFollows")
   followers Follow[] @relation("UserFollowers")
 
+  blocks  Block[] @relation("UserBlocks")
+  blocked Block[] @relation("UserBlockedBy")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -41,4 +41,20 @@ model Follow {
   @@unique([followerId, followingId])
   @@index([followerId])
   @@index([followingId])
+}
+
+model Block {
+  id        String @id @default(uuid())
+  blockerId String
+  blockedId String
+
+  blocker User @relation("UserBlocks", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked User @relation("UserBlockedBy", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([blockerId, blockedId])
+  @@index([blockerId])
+  @@index([blockedId])
 }
