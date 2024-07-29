@@ -10,8 +10,6 @@ export default async function DashboardChatPage() {
 
   const stream = await getStreamByUserId(self?.id);
 
-  console.log({ stream });
-
   if (!stream) throw new Error("Stream not found");
 
   return (

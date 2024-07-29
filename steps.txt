@@ -14,3 +14,4 @@ consider the user of react query
     --- create the stream lib 
     --- create the action
         --- create action for chat settings
+--- ui setup for livestream setup
