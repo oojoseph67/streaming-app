@@ -24,7 +24,7 @@ export function Actions() {
             variant="ghost"
             className="text-muted-foreground hover:text-primary"
           >
-            <Link href={`/u/${user.user.username}}`}>
+            <Link href={`/u/${user.user.username}`}>
               <Clapperboard className="h-5 w-5 lg:mr-2" />
               <span className="hidden lg:block">Dashboard</span>
             </Link>

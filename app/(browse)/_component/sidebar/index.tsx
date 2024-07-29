@@ -12,9 +12,6 @@ export async function Sidebar() {
   const recommended = await getRecommended();
   const following = await getFollowedUsers();
 
-  console.log({ recommended });
-  console.log({ following });
-
   return (
     <div>
       <Wrapper>

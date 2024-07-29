@@ -12,15 +12,11 @@ export async function POST(req: Request) {
     );
   }
 
-  console.log('passing CLERK_WEBHOOKS_SECRET')
-
   // Get the headers
   const headerPayload = headers();
   const svix_id = headerPayload.get("svix-id");
   const svix_timestamp = headerPayload.get("svix-timestamp");
   const svix_signature = headerPayload.get("svix-signature");
-
-  console.log('passing header payload')
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
@@ -28,8 +24,6 @@ export async function POST(req: Request) {
       status: 400,
     });
   }
-
-  console.log('payload reached')
 
   // Get the body
   const payload = await req.json();
@@ -47,8 +41,6 @@ export async function POST(req: Request) {
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
     }) as WebhookEvent;
-
-    console.log('passed try catch')
   } catch (err) {
     console.error("Error verifying webhook:", err);
     return new Response("Error occurred", {
@@ -56,7 +48,6 @@ export async function POST(req: Request) {
     });
   }
 
-  console.log('after try catch')
   // Do something with the payload
   // For this guide, you simply log the payload to the console
   const { id } = evt.data;

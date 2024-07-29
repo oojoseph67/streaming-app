@@ -7,8 +7,6 @@ export async function onFollow(id: string) {
   try {
     const followedUser = await followUser(id);
 
-    console.log({ followedUser });
-
     revalidatePath("/");
 
     if (followedUser) {
