@@ -8,11 +8,7 @@ export const getRecommended = async () => {
 
   try {
     const self = await getSelf();
-    if (!self) {
-      // Handle the case when there is no user
-      return [];
-    }
-    userId = self.id;
+    userId = self?.id || null;
   } catch {
     userId = null;
   }
