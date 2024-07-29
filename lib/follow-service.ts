@@ -57,7 +57,11 @@ export async function getFollowedUsers() {
         },
       },
       include: {
-        following: true,
+        following: {
+          include: {
+            stream: true,
+          },
+        },
       },
     });
 

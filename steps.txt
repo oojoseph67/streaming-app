@@ -17,3 +17,4 @@ consider the user of react query
 --- ui setup for livestream setup
 --- live-kit setup
     --- ingress action for live-kit
+--- update getRecommended to query the stream model

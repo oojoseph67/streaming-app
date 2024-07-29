@@ -48,12 +48,18 @@ export const getRecommended = async () => {
           },
         ],
       },
+      include: {
+        stream: true,
+      },
       take: 10,
       orderBy: { createdAt: "desc" },
     });
   } else {
     users = await db.user.findMany({
       take: 10,
+      include: {
+        stream: true,
+      },
       orderBy: { createdAt: "desc" },
     });
   }
