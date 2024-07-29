@@ -7,4 +7,10 @@
 ////////////////////////////////
 consider the user of react query
 ////////////////////////////////
---- 
+--- dashboard and ui navigation setup
+--- stream model added:
+    --- db model setup
+    --- stream create added to the route file
+    --- create the stream lib 
+    --- create the action
+        --- create action for chat settings

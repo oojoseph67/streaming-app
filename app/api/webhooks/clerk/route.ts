@@ -65,13 +65,27 @@ export async function POST(req: Request) {
   /** MY CUSTOM CODE */
 
   if (eventType === "user.created") {
+    // Create the user first
     await db.user.create({
       data: {
         externalUserId: payload.data.id,
         username: payload.data.username,
         imageUrl: payload.data.image_url,
+        stream: {
+          create: {
+            name: `${payload.data.username}'s stream`,
+          }
+        }
       },
     });
+
+    // Then create the stream and link it to the user
+    // await db.stream.create({
+    //   data: {
+    //     name: `${payload.data.username}'s stream`,
+    //     userId: user.id,
+    //   },
+    // });
   }
 
   if (eventType === "user.updated") {
