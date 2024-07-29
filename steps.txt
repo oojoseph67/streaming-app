@@ -15,3 +15,5 @@ consider the user of react query
     --- create the action
         --- create action for chat settings
 --- ui setup for livestream setup
+--- live-kit setup
+    --- ingress action for live-kit
