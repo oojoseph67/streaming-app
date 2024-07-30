@@ -19,3 +19,5 @@ consider the user of react query
     --- ingress action for live-kit
 --- update getRecommended to query the stream model
 --- created the live-kit web-hooks https://immortal-healthy-hyena.ngrok-free.app/api/webhooks/livekit
+--- stream-plater component added
+--- create hook folder with use-viewer-token file
