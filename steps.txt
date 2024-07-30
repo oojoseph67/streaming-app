@@ -22,3 +22,4 @@ consider the user of react query
 --- stream-plater component added
 --- create hook folder with use-viewer-token file
 --- video component added
+--- chat component added

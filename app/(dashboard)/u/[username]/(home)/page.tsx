@@ -9,7 +9,6 @@ export default async function CreatorPage({
   params: { username: string };
 }) {
   const externalUser = await currentUser();
-  console.log({ username: params.username });
   const user = await getUserByUsername(params.username);
 
   if (!user || user.externalUserId !== externalUser?.id || !user.stream) {
