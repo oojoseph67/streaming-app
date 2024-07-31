@@ -23,3 +23,5 @@ consider the user of react query
 --- create hook folder with use-viewer-token file
 --- video component added
 --- chat component added
+--- community component
+--- follower and stream details section added to the stream component
