@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Chat, ChatSkeleton } from "./chat/chat";
 import { ChatToggle } from "./chat/chat-toggle";
 import { StreamHeader, StreamHeaderSkeleton } from "./header/stream-header";
+import { StreamInfoCard } from "./info-card/info-card";
 
 type StreamPlayerProps = {
   user: User & { stream: Stream | null };
@@ -47,6 +48,12 @@ export function StreamPlayer({ user, stream, isFollowing }: StreamPlayerProps) {
             imageUrl={user.imageUrl}
             isFollowing={isFollowing!}
             name={stream?.name || ""}
+          />
+          <StreamInfoCard
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            name={stream?.name || ""}
+            thumbnailUrl={stream?.thumbnail || ""}
           />
         </div>
         <div className={cn("col-span-1", collapsed && "hidden")}>

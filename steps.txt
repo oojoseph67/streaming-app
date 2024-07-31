@@ -25,3 +25,4 @@ consider the user of react query
 --- chat component added
 --- community component
 --- follower and stream details section added to the stream component
+--- info card added (but thumbnail upload not working for now)
